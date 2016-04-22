@@ -1,21 +1,44 @@
 <ion-view title="Inicia sesion" id="page7" style="background-color:#232C39;">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <form class="list">
+        <form class="list" ng-controller="iniciaSesionCtrl">
             <div style="text-align:center;">
                 <img src="img/4moXN2BLQ32QDxJJkHZA_Isotipo-Antorcha.png" width="60%" height="auto">
             </div>
             <ion-list>
                 <label class="item item-input">
-                    <input type="email" placeholder="Correo electronico">
+                    <input type="email" placeholder="Correo electronico" ng-model="correo">
                 </label>
                 <label class="item item-input">
-                    <input type="password" placeholder="Contraseña">
+                    <input type="password" placeholder="Contraseña" ng-model="pass">
                 </label>
             </ion-list>
             <div class="spacer" style="width: 285px; height: 24px;"></div>
-            <button id="iniciaSesion-button1" style="font-weight:;" class="button button-assertive  button-block">Inicia sesion</button>
+            <button ng-click="logeo()" id="iniciaSesion-button1" style="font-weight:;" class="button button-assertive  button-block">Inicia sesion</button>
             <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="iniciaSesion-button2" style="font-weight:;" class="button button-light button-small button-block button-clear">¿Olvidaste tu contraseña?</a>
-            <button id="iniciaSesion-button39" class="button button-positive  button-block">Iniciar sesion con facebook</button>
+            <!-- <button id="iniciaSesion-button39" class="button button-positive  button-block">Iniciar sesion con facebook</button>-->
         </form>
+        <h1>{{ response }}</h1>
     </ion-content>
+    <script>
+          var app = angular.module('app', []);
+          app.controller('loginController', function($scope, $http) {
+            $scope.response = "";
+
+            $scope.logeo = function(){
+              $http({
+                  method : "POST",
+                  url : "http://api.antorcha.mx/login"
+                  data: {'correo =' + $scope.correo, 'pass=' + $scope.pass}
+              })
+              .success(function(response){
+                $scope.response = response.data;
+
+              })
+              .error(function(){
+                    $scope.response = response.data;
+              });
+            }
+
+          });
+    </script>
 </ion-view>
