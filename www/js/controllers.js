@@ -1,4 +1,4 @@
-angular.module('app.controllers', [])
+var app = angular.module('app.controllers', [])
 
 .controller('buscarEspaciosCtrl', function($scope) {
 
@@ -40,32 +40,62 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('iniciaSesionCtrl', function($scope, $http) {
+.controller('iniciaSesionCtrl', function($scope, $http, $location) {
   $scope.response = "";
 
   $scope.logeo = function(){
     var credenciales = {
-      "correo" : "$scope.correo",
-      "pass" : "$scope.pass"
-    }
+    "correo" : $scope.correo,
+    "pass" : $scope.pass
+    };
+
+    console.log(credenciales);
     $http({
         method : "POST",
         url : "http://api.antorcha.mx/login",
+      //  url : "http://antorcha.app/login",
         data:  credenciales,
     })
     .success(function(response){
-      $scope.response = response.data;
-
+        console.log(response);
+        app.constant('usuario', response);
+        $scope.changeView =   $location.path('tab1');
     })
     .error(function(){
-          $scope.response = response.data;
+          $scope.response = response.nombre;
+          console.log(response);
     });
   }
 
 })
 
-.controller('regStrateCtrl', function($scope) {
+.controller('regStrateCtrl', function($scope, $http, $location) {
+    $scope.registro = function(){
 
+      var datosUsuario = {
+         "nombre" : $scope.nombre,
+         "correo" : $scope.correo,
+         "sexo" : $scope.genero,
+         "pass" : $scope.pass,
+         "fechaNacimiento" : $scope.fechaNacimiento
+      }
+
+      $http({
+          method : "POST",
+          //url : "http://api.antorcha.mx/login",
+          url : "http://antorcha.app/V0.1/miembros",
+          data:  datosUsuario,
+      })
+      .success(function(response){
+          console.log(response);
+          app.constant('usuario.id', response);
+          $scope.changeView =  $location.path('tab7');
+      })
+      .error(function(){
+            $scope.response = response.nombre;
+            console.log(response);
+      });
+    }
 })
 
 .controller('detallesEspacioCtrl', function($scope) {
@@ -96,6 +126,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('datosDePerfilCtrl', function($scope) {
+.controller('datosDePerfilCtrl',['usuario', function($scope) {
+    console.log(usuario);
 
-})
+}])

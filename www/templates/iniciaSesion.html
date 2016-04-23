@@ -17,28 +17,6 @@
             <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="iniciaSesion-button2" style="font-weight:;" class="button button-light button-small button-block button-clear">¿Olvidaste tu contraseña?</a>
             <!-- <button id="iniciaSesion-button39" class="button button-positive  button-block">Iniciar sesion con facebook</button>-->
         </form>
-        <h1>{{ response }}</h1>
+        
     </ion-content>
-    <script>
-          var app = angular.module('app', []);
-          app.controller('loginController', function($scope, $http) {
-            $scope.response = "";
-
-            $scope.logeo = function(){
-              $http({
-                  method : "POST",
-                  url : "http://api.antorcha.mx/login"
-                  data: {'correo =' + $scope.correo, 'pass=' + $scope.pass}
-              })
-              .success(function(response){
-                $scope.response = response.data;
-
-              })
-              .error(function(){
-                    $scope.response = response.data;
-              });
-            }
-
-          });
-    </script>
 </ion-view>

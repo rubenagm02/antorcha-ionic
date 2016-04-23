@@ -1,4 +1,4 @@
-<ion-view title="Mi perfil" id="page4">
+<ion-view title="Mi perfil" id="page4" ng-controller="datosDePerfilCtrl">
     <ion-content overflow-scroll="true" padding="true" class="has-header has-footer">
         <div class="button-bar">
             <button id="miPerfil-button52" class="button button-positive button-small button-block">Perfil</button>
@@ -11,7 +11,7 @@
             </div>
         </a>
         <div id="miPerfil-markdown29" style="color:#000000;text-align:center;">
-            <p>Nombre del Usuario | Edad</p>
+            <p>{{nombreUsuario}} | {{edad}}</p>
         </div>
         <div class="spacer" style="width: 285px; height: 24px;"></div>
         <div id="miPerfil-markdown30" style="color:#000000;text-align:center;">
