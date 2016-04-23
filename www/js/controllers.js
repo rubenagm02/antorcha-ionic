@@ -72,8 +72,8 @@ var app = angular.module('app.controllers', [])
     //console.log(credenciales);
     $http({
         method : "POST",
-    //    url : "http://api.antorcha.mx/login",
-        url : "http://antorcha.app/login",
+        url : "http://api.antorcha.mx/login",
+        //url : "http://antorcha.app/login",
         data:  credenciales,
     })
     .success(function(response){
@@ -147,8 +147,8 @@ var app = angular.module('app.controllers', [])
 })
 
 .controller('datosDePerfilCtrl', function($scope, $rootScope) {
-    console.log($scope.usuario);
+    /*console.log($scope.usuario);
     $scope.nombreUsuario = $scope.usuario.nombre;
-    $scope.edad = $scope.usuario.descripcion;
+    $scope.edad = $scope.usuario.descripcion;*/
 
 })
