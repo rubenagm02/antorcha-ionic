@@ -24,7 +24,36 @@ var app = angular.module('app.controllers', [])
 
 })
 
-.controller('especialistasCtrl', function($scope) {
+.controller('especialistasCtrl', function($scope, $http) {
+
+    $scope.buscaEspecialistas = function(){
+        $http({
+            method : "GET",
+        //    url : "http://api.antorcha.mx/login",
+            url : "http://antorcha.app/V0.1/xEspecialidad/" + $scope.tipo +"/"+$scope.municipio ,
+        })
+        .success(function(response){
+            console.log(response);
+            var respuesta = response;
+            for(especialista in response){
+              if(especialista.especialidad == 1 ){
+                  respuesta.especialidad = "Nutriologo";//Fisioterapeuta
+              }else if(especialista.especialidad == 2){
+                  respuesta.especialidad = "Fisioterapeuta";//
+              }else if(especialista.especialidad == 3){
+                  respuesta.especialidad = "Entrenador";//
+              }
+            }
+            $scope.especialistas = respuesta;
+            //$rootScope.usuario =  response;
+            //$scope.changeView =   $location.path('tab1');
+        })
+        .error(function(){
+              //$scope.response = response.nombre;
+              console.log(response);
+        });
+    }
+
 
 })
 
@@ -32,7 +61,7 @@ var app = angular.module('app.controllers', [])
 
 })
 
-.controller('iniciaSesionCtrl', function($scope, $http, $location) {
+.controller('iniciaSesionCtrl', function($scope, $http, $location, $rootScope) {
   $scope.response = "";
 
   $scope.logeo = function(){
@@ -40,28 +69,27 @@ var app = angular.module('app.controllers', [])
     "correo" : $scope.correo,
     "pass" : $scope.pass
     };
-
-    console.log(credenciales);
+    //console.log(credenciales);
     $http({
         method : "POST",
-        url : "http://api.antorcha.mx/login",
-      //  url : "http://antorcha.app/login",
+    //    url : "http://api.antorcha.mx/login",
+        url : "http://antorcha.app/login",
         data:  credenciales,
     })
     .success(function(response){
-        console.log(response);
-        app.constant('usuario', response);
+        //console.log(response);
+        $rootScope.usuario =  response;
         $scope.changeView =   $location.path('tab1');
     })
     .error(function(){
           $scope.response = response.nombre;
-          console.log(response);
+          //console.log(response);
     });
   }
 
 })
 
-.controller('regStrateCtrl', function($scope, $http, $location) {
+.controller('regStrateCtrl', function($scope, $http, $location, $rootScope) {
     $scope.registro = function(){
 
       var datosUsuario = {
@@ -79,13 +107,13 @@ var app = angular.module('app.controllers', [])
           data:  datosUsuario,
       })
       .success(function(response){
-          console.log(response);
-          app.constant('usuario.id', response);
+        //  console.log(response);
+          $rootScope.usuario.id = response.id;
           $scope.changeView =  $location.path('tab7');
       })
       .error(function(){
             $scope.response = response.nombre;
-            console.log(response);
+          //  console.log(response);
       });
     }
 })
@@ -118,7 +146,9 @@ var app = angular.module('app.controllers', [])
 
 })
 
-.controller('datosDePerfilCtrl',['usuario', function($scope) {
-    console.log(usuario);
+.controller('datosDePerfilCtrl', function($scope, $rootScope) {
+    console.log($scope.usuario);
+    $scope.nombreUsuario = $scope.usuario.nombre;
+    $scope.edad = $scope.usuario.descripcion;
 
-}])
+})
