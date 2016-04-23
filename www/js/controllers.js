@@ -16,10 +16,6 @@ var app = angular.module('app.controllers', [])
 
 })
 
-.controller('miPerfilCtrl', function($scope) {
-
-})
-
 .controller('disciplinasCtrl', function($scope) {
 
 })
