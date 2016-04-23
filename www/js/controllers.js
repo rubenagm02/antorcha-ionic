@@ -76,8 +76,8 @@ var app = angular.module('app.controllers', [])
     //console.log(credenciales);
     $http({
         method : "POST",
-    //    url : "http://api.antorcha.mx/login",
-        url : "http://antorcha.app/login",
+       url : "http://api.antorcha.mx/login",
+      //  url : "http://antorcha.app/login",
         data:  credenciales,
     })
     .success(function(response){
@@ -90,7 +90,6 @@ var app = angular.module('app.controllers', [])
           //console.log(response);
     });
   }
-
 })
 
 .controller('regStrateCtrl', function($scope, $http, $location, $rootScope) {
@@ -106,8 +105,8 @@ var app = angular.module('app.controllers', [])
 
       $http({
           method : "POST",
-          //url : "http://api.antorcha.mx/login",
-          url : "http://antorcha.app/V0.1/miembros",
+          url : "http://api.antorcha.mx/V0.1/miembros",
+        //  url : "http://antorcha.app/V0.1/miembros",
           data:  datosUsuario,
       })
       .success(function(response){
@@ -142,7 +141,61 @@ var app = angular.module('app.controllers', [])
 
 })
 
-.controller('deportesFavoritosCtrl', function($scope) {
+.controller('deportesFavoritosCtrl', function($scope, $http) {
+  $scope.disciplinas = "";
+
+  $http({
+      method : "GET",
+  //    url : "http://api.antorcha.mx/login",
+      url : "http://api.antorcha.mx/V0.1/disciplinas" ,
+  })
+  .success(function(response){
+      //console.log(response);
+      $scope.disciplinas = response;
+      //$rootScope.usuario =  response;
+      //$scope.changeView =   $location.path('tab1');
+  })
+  .error(function(){
+        //$scope.response = response.nombre;
+        console.log(response);
+  });
+
+  $http({
+      method : "GET",
+      url : "http://api.antorcha.mx/V0.1/deportes" ,
+  })
+  .success(function(response){
+  //    console.log(response);
+      $scope.deportes = response;
+      //$rootScope.usuario =  response;
+      //$scope.changeView =   $location.path('tab1');
+  })
+  .error(function(){
+        //$scope.response = response.nombre;
+        console.log(response);
+  });
+
+  /*$scope.guardaDeporte = function(idDeporte){
+    $http({
+        method : "POST",
+    //    url : "http://api.antorcha.mx/login",
+        url : "http://api.antorcha.mx/V0.1/miembroDeporte" ,
+        data : { "idMiembro" : $scope.usuario.id,
+                  "idDeporte" : idDeporte
+                }
+    })
+    .success(function(response){
+    //    console.log(response);
+        $scope.deportes = response;
+        //$rootScope.usuario =  response;
+        //$scope.changeView =   $location.path('tab1');
+    })
+    .error(function(){
+          //$scope.response = response.nombre;
+          console.log(response);
+    });
+  }*/
+
 
 })
 
