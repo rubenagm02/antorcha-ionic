@@ -4,56 +4,15 @@ var app = angular.module('app.controllers', [])
 
 })
 
-.controller('buscarEventosCtrl', function($scope) {
-
-})
-
 .controller('misActividadesCtrl', function($scope) {
 
 })
 
 .controller('misEventosCtrl', function($scope) {
-
+  $scope.eventos = JSON.parse(window.localStorage.getItem("eventos"));
 })
 
 .controller('disciplinasCtrl', function($scope) {
-
-})
-
-.controller('metasCtrl', function($scope) {
-
-})
-
-.controller('especialistasCtrl', function($scope, $http) {
-
-    $scope.buscaEspecialistas = function(){
-        $http({
-            method : "GET",
-        //    url : "http://api.antorcha.mx/login",
-            url : "http://antorcha.app/V0.1/xEspecialidad/" + $scope.tipo +"/"+$scope.municipio ,
-        })
-        .success(function(response){
-            console.log(response);
-            var respuesta = response;
-            for(especialista in response){
-              if(especialista.especialidad == 1 ){
-                  respuesta.especialidad = "Nutriologo";//Fisioterapeuta
-              }else if(especialista.especialidad == 2){
-                  respuesta.especialidad = "Fisioterapeuta";//
-              }else if(especialista.especialidad == 3){
-                  respuesta.especialidad = "Entrenador";//
-              }
-            }
-            $scope.especialistas = respuesta;
-            //$rootScope.usuario =  response;
-            //$scope.changeView =   $location.path('tab1');
-        })
-        .error(function(){
-              //$scope.response = response.nombre;
-              console.log(response);
-        });
-    }
-
 
 })
 
@@ -78,12 +37,11 @@ var app = angular.module('app.controllers', [])
     })
     .success(function(response){
         //console.log(response);
-        $rootScope.usuario =  response;
-        $scope.changeView =   $location.path('tab1');
+        window.localStorage.setItem( "usuario", JSON.stringify(response) );
+        $scope.changeView = $location.path('tab1');
     })
     .error(function(){
-          $scope.response = response.nombre;
-          //console.log(response);
+        alert("Parece que hubo un error");
     });
   }
 })
@@ -118,10 +76,6 @@ var app = angular.module('app.controllers', [])
 })
 
 .controller('detallesEspacioCtrl', function($scope) {
-
-})
-
-.controller('detallesEventoCtrl', function($scope) {
 
 })
 
@@ -192,10 +146,6 @@ var app = angular.module('app.controllers', [])
     });
   }*/
 
-
-})
-
-.controller('nuevaMetaCtrl', function($scope) {
 
 })
 

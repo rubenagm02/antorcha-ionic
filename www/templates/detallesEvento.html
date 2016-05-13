@@ -3,17 +3,17 @@
         <ion-list>
             <ion-item class="item-thumbnail-left">
                 <img src="img/gjfCbeGJSwyhmk0bbZ8c_Default-Evento-320.jpg">
-                <h2>Nombre de evento</h2>
-                <p>543 Personas asistiran</p>
+                <h2>{{evento.nombre}}</h2>
+                <!--<p>543 Personas asistiran</p>-->
             </ion-item>
         </ion-list>
         <div class="spacer" style="width: 285px; height: 23px;"></div>
         <div id="detallesEvento-markdown15" style="color:#000000;text-align:center;">
             <p>
-                <strong>5/Nov/15 9:00hrs - 5/Nov/15 22:00hrs</strong>
+                <strong>{{evento.fecha}}</strong>
             </p>
         </div>
-        <a href="tel:" id="detallesEvento-button29" class="button button-light  button-clear icon ion-ios-telephone"></a>
+        <a href="tel:{{evento.telefono}}" id="detallesEvento-button29" class="button button-light  button-clear icon ion-ios-telephone"></a>
         <a ui-sref="tabsController.expandeElFuego" id="detallesEvento-button30" class="button button-light  button-clear icon ion-share"></a>
         <div class="spacer" style="width: 285px; height: 23px;"></div>
         <div id="detallesEvento-markdown17" style="color:#000000;">
@@ -22,7 +22,7 @@
             </p>
         </div>
         <div id="detallesEvento-markdown18" style="color:#535353;">
-            <p>Domicilio y detalles del lugar, ya se un espacio deportivo, un recinto o algunas calles.</p>
+            <p>{{evento.direccion}}</p>
         </div>
         <button id="detallesEvento-button28" style="color:Default;" class="button button-light  button-clear icon ion-map"></button>
         <div class="spacer" style="width: 285px; height: 23px;"></div>
@@ -32,11 +32,10 @@
             </p>
         </div>
         <div id="detallesEvento-markdown20" style="color:#535353;">
-            <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides,
-                I've already been through too much shit this morning over this case to hand it over to your dumb ass.</p>
+            <p>{{evento.descripcion}}</p>
         </div>
         <div class="spacer" style="width: 285px; height: 23px;"></div>
-        <div id="detallesEvento-markdown21" style="color:#000000;">
+        <!--<div id="detallesEvento-markdown21" style="color:#000000;">
             <p>
                 <strong>Premios</strong>
             </p>
@@ -53,7 +52,7 @@
 
             <p>
                 <strong>Todos los participantes.-</strong>Premio</p>
-        </div>
+        </div>-->
         <div class="spacer" style="width: 285px; height: 23px;"></div>
         <div style="text-align:center;">
             <img src="img/69RYssnIRgajp3Pis4y3_Default-Espacio-320.jpg" width="100%" height="auto">
@@ -61,7 +60,7 @@
         <button id="detallesEvento-button35" class="button button-light  button-clear icon ion-chevron-left"></button>
         <button id="detallesEvento-button36" class="button button-light  button-clear icon ion-chevron-right"></button>
         <div class="spacer" style="width: 285px; height: 23px;"></div>
-        <div id="detallesEvento-markdown26" style="color:#000000;">
+        <!--<div id="detallesEvento-markdown26" style="color:#000000;">
             <p>
                 <strong>Precio</strong>
             </p>
@@ -76,6 +75,7 @@
             </label>
             <div class="spacer" style="width: 285px; height: 23px;"></div>
             <a ui-sref="tabsController.misActividades" id="detallesEvento-button37" class="button button-assertive  button-block">Agregar a calendario</a>
-        </form>
+        </form>-->
+         <a ng-click="agregarEvento({{evento}})" id="detallesEvento-button37" class="button button-assertive  button-block">Agregar a calendario</a>
     </ion-content>
 </ion-view>

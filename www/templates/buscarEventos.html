@@ -4,11 +4,24 @@
             <a ui-sref="tabsController.buscarEspacios" id="buscarEventos-button12" style="font-weight:;" class="button button-positive button-small button-block button-outline">Espacios</a>
             <button id="buscarEventos-button13" style="font-weight:;" class="button button-positive button-small button-block">Eventos</button>
         </div>
-        <a ui-sref="tabsController.detallesEvento" id="buscarEventos-button15" class="button button-positive button-small button-block">Detalles evento</a>
-        <div>
-            <p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14927.755260991304!2d-103.33071090688476!3d20.71270902328088!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1457659700106" width="100%" height="360" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-            </p>
+        <!--<a ui-sref="tabsController.detallesEvento" id="buscarEventos-button15" class="button button-positive button-small button-block">Detalles evento</a>-->
+        <div class="list card">
+            <div class="item item-body" ng-repeat="evento in eventos"><!-- ng-repeat="especialista in especialistas"-->
+                <form class="list">
+                    <ion-item class="item-thumbnail-left">
+                        <img src="img/r2AzIi1RNXMXKl1pnwWA_Default-Perfil-Hombre-320.jpg">
+                        <h2>{{evento.nombre}}</h2>
+                        <p>{{evento.fecha}}</p>
+                    </ion-item>
+                    <div id="especialistas-markdown16" style="color:#000000;">
+                    </div>
+                    <!--<div class="spacer" style="width: 253px; height: 18px;"></div>-->
+                    <div style="float: right;">
+                        <!--<a style="margin-right: auto;" href="mailto:{{ especialista.correo }}" id="especialistas-button87" class="button button-stable  button-clear icon ion-plus"></a>-->
+                        <a ng-click="detalleEvento({{evento}})" id="especialistas-button88" class="button button-stable  button-clear icon ion-chevron-right"></a>
+                    </div>
+                </form>
+            </div>
         </div>
     </ion-content>
 </ion-view>

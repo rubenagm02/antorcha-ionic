@@ -7,20 +7,20 @@
             </div>
             <a ui-sref="tabsController.nuevaMeta" id="metas-button86" class="button button-assertive button-small button-block">Agregar nueva meta</a>
             <div class="list card">
-                <div class="item item-body">
+                <div class="item item-body" ng-repeat="meta in metas">
                     <form class="list">
-                        <h1 id="metas-heading10" style="color:#000000;font-weight:300;text-align:center;">50%</h1>
+                        <h1 id="metas-heading10" style="color:#000000;font-weight:300;text-align:center;">{{meta.porcentaje}}%</h1>
                         <ion-item class="range range-positive">
                             <input type="range" value="50" min="0" max="100">
                         </ion-item>
                         <div id="metas-markdown33" style="color:#000000;text-align:center;">
                             <p>
-                                <strong>Nombre de la meta</strong>
+                                <strong>{{meta.nombre}}</strong>
                             </p>
 
                             <p>
-                                <strong>65Kg</strong>Actual -
-                                <strong>62Kg</strong>Meta</p>
+                                <strong>{{meta.inicio}}{{meta.tipoMedida}} </strong>Actual -
+                                <strong>{{meta.fin}}{{meta.tipoMedida}} </strong>Meta</p>
                         </div>
                         <div class="spacer" style="width: 253px; height: 18px;"></div>
                         <button id="metas-button90" class="button button-positive  button-clear">Actualizar</button>
