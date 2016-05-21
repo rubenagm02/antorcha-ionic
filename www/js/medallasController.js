@@ -38,6 +38,7 @@ var app = angular.module('app.controllers')
         $scope.nombre_medalla = response[0].nombreMedalla;
         $scope.descripcion_medalla = response[0].descripcionMedalla;
         $scope.cantidad_medallas = "0/" + response.length;
+	    $scope.imagen_medalla = response[0].tipoMedalla;
 
 
     })
@@ -51,6 +52,7 @@ var app = angular.module('app.controllers')
 			$scope.tipo_medalla = obtenerTipoMedalla(medallas[indice - 1].tipoMedalla);
 	        $scope.nombre_medalla = medallas[indice - 1].nombreMedalla;
 	        $scope.descripcion_medalla = medallas[indice - 1].descripcionMedalla;
+	        $scope.imagen_medalla = medallas[indice - 1].tipoMedalla;
 	        indice --;
         }
     };
@@ -61,6 +63,7 @@ var app = angular.module('app.controllers')
 			$scope.tipo_medalla = obtenerTipoMedalla(medallas[indice + 1].tipoMedalla);
 	        $scope.nombre_medalla = medallas[indice + 1].nombreMedalla;
 	        $scope.descripcion_medalla = medallas[indice + 1].descripcionMedalla;
+	        $scope.imagen_medalla = medallas[indice + 1].tipoMedalla;
 	        indice ++;
         }
     };

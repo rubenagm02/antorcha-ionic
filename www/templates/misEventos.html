@@ -8,14 +8,14 @@
             <div class="item item-body" ng-repeat="evento in eventos">
                 <ion-list>
                     <ion-item class="item-thumbnail-left">
-                        <img src="img/cFpSUUkR2yjgJYN6rgfg_Default-Evento-320.jpg">
+                        <img ng-src="{{evento.imagen}}">
                         <h2>{{evento.nombre}}</h2>
                         <p>{{evento.fecha}}</p>
                     </ion-item>
                 </ion-list>
                 <button id="misEventos-button33" style="color:Default;" class="button button-stable  button-clear icon ion-more"></button>
                 <!--<a ui-sref="tabsController.detallesEspacio" id="misEventos-button44" style="color:Default;text-align:right;" class="button button-positive  button-clear">Locacion</a>-->
-                <a ui-sref="tabsController.expandeElFuego" id="misEventos-button45" style="color:Default;text-align:right;" class="button button-positive  button-clear">Invitar</a>
+                <a ng-click="invitar({{evento}})" id="misEventos-button45" style="color:Default;text-align:right;" class="button button-positive  button-clear">Invitar</a>
             </div>
         </div>
         <ion-list></ion-list>

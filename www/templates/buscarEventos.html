@@ -9,7 +9,7 @@
             <div class="item item-body" ng-repeat="evento in eventos"><!-- ng-repeat="especialista in especialistas"-->
                 <form class="list">
                     <ion-item class="item-thumbnail-left">
-                        <img src="img/r2AzIi1RNXMXKl1pnwWA_Default-Perfil-Hombre-320.jpg">
+                        <img ng-src="{{evento.imagen}}">
                         <h2>{{evento.nombre}}</h2>
                         <p>{{evento.fecha}}</p>
                     </ion-item>
