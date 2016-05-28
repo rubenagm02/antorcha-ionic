@@ -1,65 +1,45 @@
 var app = angular.module('app.controllers', [])
 
-.controller('buscarEspaciosCtrl', function($scope) {
-  
+.controller('buscarEspaciosCtrl', function($scope, $http, $state, $cordovaGeolocation) {
 
-      /*var inicializar = function() {
-        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
 
-        var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("mapa"),
-            mapOptions);
+  var options = {timeout: 10000, enableHighAccuracy: true};
 
-        //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
-        var compiled = $compile(contentString)($scope);
+  $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 
-        var infowindow = new google.maps.InfoWindow({
-          content: compiled[0]
-        });
+    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map,marker);
-        });
-
-        $scope.mapa = map;
-    }
-
-    $scope.centerOnMe = function() {
-        if(!$scope.map) {
-            return;
-        }
-
-        $scope.loading = $ionicLoading.show({
-          content: 'Getting current location...',
-          showBackdrop: false
-        });
-
-        navigator.geolocation.getCurrentPosition(function(pos) {
-          $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          $scope.loading.hide();
-        }, function(error) {
-          alert('Unable to get location: ' + error.message);
-        });
+    var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    $scope.clickTest = function() {
-        alert('Example of infowindow with ng-click')
-    };
+    $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-      //google.maps.event.addDomListener(window, 'load', inicializar);
-      $scope.inicializar = inicializar;
-*/
+  }, function(error){
+    console.log("Could not get location");
+  });
+
+  google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+    var marker = new google.maps.Marker({
+      map: $scope.map,
+      animation: google.maps.Animation.DROP,
+      position: latLng
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      content: "Here I am!"
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+      infoWindow.open($scope.map, marker);
+    });
+
+  });
+
+
 })
 
 .controller('misActividadesCtrl', function($scope) {
@@ -90,7 +70,7 @@ var app = angular.module('app.controllers', [])
     $http({
         method : "POST",
         url : "http://api.antorcha.mx/login",
-        //url : "http://antorcha.app/login",
+       // url : "http://antorcha.app/login",
         data:  credenciales,
     })
     .success(function(response){
