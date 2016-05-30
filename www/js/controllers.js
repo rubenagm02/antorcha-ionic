@@ -17,27 +17,29 @@ var app = angular.module('app.controllers', [])
 
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+    oogle.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+      var marker = new google.maps.Marker({
+        map: $scope.map,
+        animation: google.maps.Animation.DROP,
+        position: latLng
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Here I am!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+        infoWindow.open($scope.map, marker);
+      });
+
+    });
+
   }, function(error){
     console.log("Could not get location");
   });
 
-  google.maps.event.addListenerOnce($scope.map, 'idle', function(){
-
-    var marker = new google.maps.Marker({
-      map: $scope.map,
-      animation: google.maps.Animation.DROP,
-      position: latLng
-    });
-
-    var infoWindow = new google.maps.InfoWindow({
-      content: "Here I am!"
-    });
-
-    google.maps.event.addListener(marker, 'click', function () {
-      infoWindow.open($scope.map, marker);
-    });
-
-  });
+  g
 
 
 })
