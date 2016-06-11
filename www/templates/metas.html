@@ -9,9 +9,9 @@
             <div class="list card">
                 <div class="item item-body" ng-repeat="meta in metas">
                     <form class="list">
-                        <h1 id="metas-heading10" style="color:#000000;font-weight:300;text-align:center;">{{meta.porcentaje}}%</h1>
+                        <h1 id="metas-heading10" style="color:#000000;font-weight:300;text-align:center;">{{meta.avance}}%</h1>
                         <ion-item class="range range-positive">
-                            <input type="range" value="{{meta.porcentaje}}" min="0" max="100">
+                            <input type="range" value="{{meta.avance}}" min="0" max="100" disabled>
                         </ion-item>
                         <div id="metas-markdown33" style="color:#000000;text-align:center;">
                             <p>
@@ -19,12 +19,12 @@
                             </p>
 
                             <p>
-                                <strong>{{meta.inicio}}{{meta.tipoMedida}} </strong>Actual -
+                                <strong>{{meta.inicio}}{{meta.tipoMedida}} </strong>Inicial -
                                 <strong>{{meta.fin}}{{meta.tipoMedida}} </strong>Meta</p>
                         </div>
                         <div class="spacer" style="width: 253px; height: 18px;"></div>
                         <button id="metas-button90" class="button button-positive  button-clear">Actualizar</button>
-                        <button id="metas-button80" class="button button-positive  button-clear">Modificar</button>
+                        <!--<button id="metas-button80" class="button button-positive  button-clear">Modificar</button>-->
                         <button id="metas-button81" class="button button-positive  button-clear">Borrar</button>
                     </form>
                 </div>

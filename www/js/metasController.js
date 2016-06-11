@@ -19,8 +19,20 @@ var app = angular.module('app.controllers')
         for (var x = 0; x < response.length; x++) {
         	var meta = {};
         	meta = response[x];
-            meta.porcentaje = 50;
         	meta.tipoMedida = obtenerMedida(response[x].tipoMedida);
+            var avance = meta.inicio - meta.fin;;
+
+            if (meta.progreso > 0) {
+
+                if (meta.inicio > meta.fin) {
+                    avance = avance / 100 * meta.progreso - meta.fin;
+                } else {
+                    avance = avance / 100 * meta.fin - meta.progreso;
+                }
+            } else {
+                avance = 0;
+            }
+            meta.avance = avance;
         	metas.push(meta);
 
         	//Se descarga su progreso
@@ -29,35 +41,13 @@ var app = angular.module('app.controllers')
 
         $scope.metas = response;
 
-        for (var x = 0; x < $scope.metas.length; x++) {
-            var myService = {
-                async: function(id) {
-                  // $http returns a promise, which has a then function, which also returns a promise
-                  var promise = $http.get("http://api.antorcha.mx/V0.1/metaProgresos/" + id).then(function (response) {
-                    // The then function here is an opportunity to modify the response
-                    //console.log(response);
-                    // The return value gets picked up by the then in the controller.
-                    return response.data;
-                  });
-                  // Return the promise to the controller
-                  return promise;
-                }
-              };
-
-            myService.async($scope.metas[x].id).then(function (datos) {
-                console.log($scope.metas[x]);
-            });
-
-        }
-
       })
       .error(function(response){
             //$scope.response = response.nombre;
             console.log(response);
       });
-
-
 })
+
 
 function obtenerMedida (medida) {
     switch (medida) {
