@@ -44,7 +44,7 @@ var app = angular.module('app.controllers')
       })
       .error(function(response){
             //$scope.response = response.nombre;
-            console.log(response);
+            alert("Parece que hubo un error");
       });
 })
 

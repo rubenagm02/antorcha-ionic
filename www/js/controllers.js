@@ -34,13 +34,12 @@ var app = angular.module('app.controllers', [])
       
       $http({
         method : "POST",
-       url : "http://api.antorcha.mx/login",
-      //   url : "http://api.antorcha.mx/V0.1/espaciosDeportivos",
+        url : "http://api.antorcha.mx/login",
         data:  credenciales,
       })
         .success(function(response){
           //console.log(response);
-          alert("funciona el request");
+          alert(response);
           window.localStorage.setItem( "usuario", JSON.stringify(response) );
           $scope.changeView = $location.path('/page1/page2');
         })
