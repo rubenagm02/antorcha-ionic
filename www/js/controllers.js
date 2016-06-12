@@ -1,8 +1,9 @@
 var app = angular.module('app.controllers', [])
 
-  .controller('buscarEspaciosCtrl', function($scope, $http, $state, $cordovaGeolocation, pinsEspacios) {
+  .controller('buscarEspaciosCtrl', function($scope, $http, $state, $cordovaGeolocation, GoogleMaps) {
 
     //console.log(pinsEspacios.getPins());
+    GoogleMaps.init();
 
   })
 
@@ -30,20 +31,21 @@ var app = angular.module('app.controllers', [])
         "correo" : $scope.correo,
         "pass" : $scope.pass
       };
-      //console.log(credenciales);
+      
       $http({
         method : "POST",
-        url : "http://api.antorcha.mx/login",
-        // url : "http://antorcha.app/login",
+       url : "http://api.antorcha.mx/login",
+      //   url : "http://api.antorcha.mx/V0.1/espaciosDeportivos",
         data:  credenciales,
       })
         .success(function(response){
           //console.log(response);
+          alert("funciona el request");
           window.localStorage.setItem( "usuario", JSON.stringify(response) );
-          $scope.changeView = $location.path('tab1');
+          $scope.changeView = $location.path('/page1/page2');
         })
-        .error(function(){
-          alert("Parece que hubo un error");
+        .error(function(data){
+            alert("Parece que hubo un error" + data);
         });
     }
   })
@@ -86,7 +88,7 @@ var app = angular.module('app.controllers', [])
   })
 
   .controller('escribirReseACtrl', function($scope, $http) {
-    
+
     $scope.valorar = function () {
       var credenciales = {};
       credenciales.valoracion = $scope.puntuacion;
